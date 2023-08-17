@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Categories } from '../core/interfaces/category.interface';
+import { Observable, map } from 'rxjs';
+import { Categories, Category } from '../core/interfaces/category.interface';
 import {
+  Question,
   QuestionParam,
   QuestionResponse,
 } from '../core/interfaces/question.interface';
+import { ENDPOINTS } from '../core/endpoints/endpoints';
 
 @Injectable({
   providedIn: 'root',
@@ -13,13 +15,21 @@ import {
 export class TriviaService {
   constructor(private http: HttpClient) {}
 
-  getCategories(): Observable<Categories> {
-    const url = 'https://opentdb.com/api_category.php';
-    return this.http.get<Categories>(url);
+  getCategories(): Observable<Category[]> {
+    const url = ENDPOINTS.CATEGORIES;
+    return this.http.get<Categories>(url).pipe(
+      map((categories) => {
+        return categories.trivia_categories;
+      })
+    );
   }
 
-  getQuestions(params: QuestionParam): Observable<QuestionResponse> {
-    const url = `https://opentdb.com/api.php?amount=${params.amount}&category=${params.category}&difficulty=${params.difficulty}&type${params.type}`;
-    return this.http.get<QuestionResponse>(url);
+  getQuestions(params: QuestionParam): Observable<Question[]> {
+    const url = ENDPOINTS.QUESTIONS(params);
+    return this.http.get<QuestionResponse>(url).pipe(
+      map((questions) => {
+        return questions.results;
+      })
+    );
   }
 }
