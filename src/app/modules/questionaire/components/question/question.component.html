@@ -1,7 +1,5 @@
 <div class="px-4 py-2">
-    <p>
-        <b>{{ question.question }}</b>
-    </p>
+    <p class="bold" [innerHTML]="question.question"></p>
     <div>
         <div class="d-flex flex-row">
             <mat-chip-listbox [disabled]="mode === 'results'" (change)="getAnswers($event, key)">

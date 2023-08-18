@@ -1,8 +1,15 @@
 .button-primary {
   width: 100%;
   min-height: 40px;
+  max-height: 40px;
+  align-self: center;
   background-color: white;
   color: gray;
   border-radius: 10px;
   border: 1px solid gray;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+  padding: 0 10px;
 }

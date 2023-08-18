@@ -9,7 +9,7 @@ import { Question } from 'src/app/core/interfaces/question.interface';
 })
 export class ResultsComponent implements OnInit {
   questions!: Question[];
-  correctAnswers!: number;
+  correctAnswers = 0;
 
   constructor(private router: Router) {}
 
