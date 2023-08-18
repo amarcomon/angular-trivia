@@ -1,1 +1,33 @@
-<h2 class="ml-4">QUIZ MAKER</h2>
+<div class="container text-center">
+    <h2 class="ml-4">QUIZ MAKER</h2>
+</div>
+
+<div class="d-flex flex-row p-4">
+    <div class="flex-fill" *ngIf="categories$ | async as categories">
+        <mat-form-field>
+            <mat-label>Select a category</mat-label>
+            <mat-select [formControl]="category">
+                <mat-option *ngFor="let category of categories" [value]="category.id">
+                    {{category.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="flex-fill">
+        <mat-form-field>
+            <mat-label>Select difficulty</mat-label>
+            <mat-select [formControl]="difficulty">
+                <mat-option *ngFor="let difficulty of difficulties" [value]="difficulty.name">
+                    {{difficulty.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="flex-fill">
+        <button class="button-primary" (click)="createQuestionaire()">Create</button>
+    </div>
+</div>
+
+<div *ngIf="questions$ | async as questions">
+    <app-questionaire [questions]="questions"></app-questionaire>
+</div>

@@ -1,2 +1,19 @@
-<h2 class="ml-4">RESULTS</h2>
+<div class="container text-center">
+  <h2 class="ml-4">RESULTS</h2>
+</div>
+<div *ngFor="let question of questions; index as i">
+  <app-question
+    [key]="i"
+    [question]="question"
+    [mode]="'results'"
+  ></app-question>
+</div>
 
+<div class="container text-center">
+  <p [ngClass]="setBackgroundColor()">You scored {{ correctAnswers }} of 5</p>
+  <div class="flex-fill">
+    <button class="button-primary" (click)="goToQuiz()">
+      Create a new quiz
+    </button>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="px-4 py-2">
+    <p>
+        <b>{{ question.question }}</b>
+    </p>
+    <div>
+        <div class="d-flex flex-row">
+            <mat-chip-listbox [disabled]="mode === 'results'" (change)="getAnswers($event, key)">
+                <mat-chip-option [ngClass]="setChipColor(option)"
+                    *ngFor="let option of options" [selected]="handleSelected(option)">{{option}}</mat-chip-option>
+            </mat-chip-listbox>
+        </div>
+    </div>
+</div>
