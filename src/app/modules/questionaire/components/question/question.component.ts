@@ -39,7 +39,7 @@ export class QuestionComponent implements OnInit {
     }
     return option === this.question.correct_answer
       ? 'green'
-      : option === this.question.user_answer
+      : option === this.question.user_answer && option !== this.question.correct_answer
       ? 'red'
       : 'default';
   }

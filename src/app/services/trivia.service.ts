@@ -28,7 +28,16 @@ export class TriviaService {
     const url = ENDPOINTS.QUESTIONS(params);
     return this.http.get<QuestionResponse>(url).pipe(
       map((questions) => {
-        return questions.results;
+        const sanitize = JSON.stringify(questions.results)
+          .replaceAll('&#039;', '´')
+          .replaceAll('&quot;', '´')
+          .replaceAll('&amp;', '&')
+          .replaceAll('&rsquo;', '´')
+          .replaceAll('&euml;', 'ë')
+          .replaceAll('&uuml;', 'ü')
+          .replaceAll('&ouml;', 'ö')
+          .replaceAll('&auml;', 'ä');
+        return JSON.parse(sanitize);
       })
     );
   }
